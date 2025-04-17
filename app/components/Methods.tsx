@@ -4,10 +4,7 @@ import './Methods.css';
 import { useState, useEffect } from 'react';
 import { useDynamicContext, useIsLoggedIn, useUserWallets } from "@dynamic-labs/sdk-react-core";
 import { isEthereumWallet } from '@dynamic-labs/ethereum'
-import {
-  isZeroDevConnector,
-  ZeroDevSmartWalletConnectors,
-} from "@dynamic-labs/ethereum-aa";
+import { isZeroDevConnector } from "@dynamic-labs/ethereum-aa";
 import { createEcdsaKernelMigrationAccount } from "@zerodev/ecdsa-validator";
 import { KERNEL_V3_1, KERNEL_V3_2, getEntryPoint } from "@zerodev/sdk/constants"
 import { createPublicClient, http } from 'viem';
@@ -93,9 +90,9 @@ export default function DynamicMethods({ isDarkMode }: DynamicMethodsProps) {
       return;
     }
 
-    const signerConnector = connector.getEOAConnector();
+    const signerConnector = connector.eoaConnector
     const signer = await signerConnector?.getSigner();
-
+    
     const publicClient = createPublicClient({
       // Use your own RPC provider (e.g. Infura/Alchemy).
       transport: http(),
